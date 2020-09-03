@@ -13,7 +13,7 @@ wordpress files includes basic wordpress files, plugins, themes and upload files
 phpmyadmin files is the web based database management tool
 #### scripts includes
 script files used in our website
-#### datas includes
+#### shp includes
 data manipulation files.
 ## Tecnologies
 Project is run on:  
