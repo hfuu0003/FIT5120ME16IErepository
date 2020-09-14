@@ -25,6 +25,11 @@ Apache2.4
 PHP 7.0  
 MySQL 5.7  
 WordPress 5.5.1  
+## Installation
+Acceess the website via our domain: www.myhealthypets.tk
+If you want to run our website in your local machine please first install all the tecnologies requirements in your local machine and download www folder and put it in the htdocs of your webserver go to localhost/wordpress and install xyz PHP code plugin put codes in scripts in it.  
+R codes can directly run in R studio using the datasets in the same folder.
+ipynb codes can run in jupyter notebook.  
 ## Contributors
 Heyu Fu  
 Ho Wang Mak  
