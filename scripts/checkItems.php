@@ -1,6 +1,16 @@
 <form method="post">
     <label><?php _e('Check the item here: '); ?></label>
-    <input type="text" name="codename" />
+    <input type="text" name="codename" list="items"/>
+    <datalist id="items" style="display: none; table-layout: fixed; word-break: break-all;">
+        <?php
+        global $wpdb;
+        $query = "SELECT * FROM wp_item_information";  //table name here
+        $results = $wpdb->get_results($query);
+        foreach ($results as $row) {
+            echo '<option value="'.$row->name.'">' .$row->name. '</option>'; //replace name with colunmn name
+        }
+        ?>
+    </datalist>
     <button type="submit" name="submit" class="submit button"><?php _e('Check now'); ?></button><br>
 </form>
 
