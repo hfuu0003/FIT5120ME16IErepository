@@ -1902,38 +1902,21 @@ button.premium-modal-box-modal-close {
     outline: 0;
     padding: 0 !important;
     background: rgba(0, 0, 0, 0.5);
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
 }
 .premium-modal-box-modal .premium-modal-box-modal-dialog {
     position: absolute;
-    max-height: -webkit-calc(100vh - 150px);
-    max-height: calc(100vh - 150px);
-    -js-display: flex;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -moz-box-orient: vertical;
-    -moz-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    opacity: 0;
+    top: 0;
+    right: 50%;
+    -webkit-transform: translate(50%, -50%) !important;
+    -ms-transform: translate(50%, -50%) !important;
+    transform: translate(50%, -50%) !important;
+    margin: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .premium-modal-box-modal-content {
+    overflow: hidden;
     background-color: #fff;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
@@ -1968,15 +1951,14 @@ button.premium-modal-box-modal-close {
 
 .premium-modal-fade {
     opacity: 0;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.premium-in {
-    -js-display: flex !important;
-    display: -webkit-box !important;
-    display: -webkit-flex !important;
-    display: -moz-box !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
+.premium-modal-box-modal.premium-in .premium-modal-box-modal-dialog {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    top: 50%;
 }
 
 .premium-modal-box-modal-header {
@@ -2025,7 +2007,6 @@ button.premium-modal-box-modal-close {
 .premium-modal-box-modal-body {
     position: relative;
     padding: 15px;
-    overflow: hidden;
 }
 
 .premium-modal-box-modal-footer {
@@ -2112,9 +2093,6 @@ button.premium-modal-box-modal-close {
     }
 }
 
-.premium-modal-box-container[data-modal-animation*="animated-"] {
-    opacity: 0;
-}
 
 /**************** Premium Progress Bar ****************/
 /******************************************************/

@@ -48,7 +48,7 @@ class Premium_Videobox extends Widget_Base {
     
     public function get_style_depends() {
         return [
-            'font-awesome',
+            // 'font-awesome',
             'premium-addons'
         ];
     }

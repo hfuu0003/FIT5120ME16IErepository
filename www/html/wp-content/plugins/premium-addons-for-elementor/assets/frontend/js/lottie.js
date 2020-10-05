@@ -15329,7 +15329,6 @@
 
     };
 
-
     if ($('.premium-lottie-yes').length) {
 
         if (window.scopes_array) {
@@ -15433,6 +15432,9 @@
             var layout = "";
 
             $.each(settings.lottieLayers, function (index, layer) {
+
+                layer.lottie_url = 'url' === layer.source ? layer.lottie_url : layer.lottie_file.url;
+
 
                 if ("" === layer.lottie_url || !layer.show_layer_on.includes(currentDevice))
                     return;

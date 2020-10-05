@@ -73,6 +73,18 @@ class Premium_Lottie extends Widget_Base {
             ]
         );
 
+        $this->add_control('source',
+            [
+                'label'     => __('File Source', 'premium-addons-pro'),
+                'type'      => Controls_Manager::SELECT,
+                'options'   => [
+                    'url'       => __('External URL','premium-addons-pro'),
+                    'file'      => __('Media File', 'premium-addons-pro')
+                ],
+                'default'   => 'url'
+            ]
+        );
+
         $this->add_control('lottie_url', 
             [
                 'label'             => __( 'Animation JSON URL', 'premium-addons-for-elementor' ),
@@ -80,8 +92,23 @@ class Premium_Lottie extends Widget_Base {
                 'dynamic'           => [ 'active' => true ],
                 'description'       => 'Get JSON code URL from <a href="https://lottiefiles.com/" target="_blank">here</a>',
                 'label_block'       => true,
+                'condition'     => [
+                    'source'   => 'url'
+                ]
             ]
         );
+
+        $this->add_control('lottie_file',
+			[
+				'label'     => __( 'Upload JSON File', 'elementor-pro' ),
+				'type'      => Controls_Manager::MEDIA,
+				'media_type'=> 'application/json',
+				'frontend_available' => true,
+				'condition' => [
+					'source' => 'file',
+				],
+			]
+		);
 
         $this->add_control('lottie_loop',
             [
@@ -508,7 +535,7 @@ class Premium_Lottie extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
 
-        $anim_url = $settings['lottie_url'];
+        $anim_url = 'url' === $settings['source'] ? $settings['lottie_url'] : $settings['lottie_file']['url'];
 
         if( empty( $anim_url ) )
             return; 
@@ -517,7 +544,7 @@ class Premium_Lottie extends Widget_Base {
             'class' => [
                 'premium-lottie-animation',
             ],
-            'data-lottie-url' => $settings['lottie_url'],
+            'data-lottie-url' => $anim_url,
             'data-lottie-loop' => $settings['lottie_loop'],
             'data-lottie-reverse' => $settings['lottie_reverse'],
             'data-lottie-hover' => $settings['lottie_hover'],
@@ -583,7 +610,7 @@ class Premium_Lottie extends Widget_Base {
 
         <#
         
-        var anim_url = settings.lottie_url;
+        var anim_url = 'url' === settings.source ? settings.lottie_url : settings.lottie_file.url;
 
         if( '' === anim_url )
             return; 
@@ -592,7 +619,7 @@ class Premium_Lottie extends Widget_Base {
             'class': [
                 'premium-lottie-animation',
             ],
-            'data-lottie-url': settings.lottie_url,
+            'data-lottie-url': anim_url,
             'data-lottie-loop': settings.lottie_loop,
             'data-lottie-reverse': settings.lottie_reverse,
             'data-lottie-hover': settings.lottie_hover,

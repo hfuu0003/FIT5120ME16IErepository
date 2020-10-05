@@ -87,7 +87,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
                         );
                     } else {
                         $success = array(
-                            'notice'  => sprintf( '<div class="message success">%s</div>', __( 'You have successfully pointed the A and CNAME records to Stackpath.', 'ssl-zen' ) ),
+                            'notice'  => sprintf( '<div class="message success">%s</div>', __( 'You have successfully pointed the A record to Stackpath.', 'ssl-zen' ) ),
                             'records' => $correct_records,
                         );
                         update_option( 'ssl_zen_settings_stage', 'step3' );
@@ -149,10 +149,27 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
         }
         
         /**
+         * Get the path for wp-config.php.
+         */
+        public static function get_wp_config()
+        {
+            $wp_config_path = null;
+            return $wp_config_path;
+        }
+        
+        /**
          * Removes the changes made in wp-config.php for stackpath.
          */
         public static function remove_fix_wp_config()
         {
+        }
+        
+        /**
+         * Determines if wp-config.php contains changes for stackpath.
+         */
+        public static function wp_config_has_stackpath_changes()
+        {
+            return false;
         }
         
         /**
@@ -1083,7 +1100,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
                 
                 if ( !$apiResponse || intval( $apiResponse['wait'] ) === 1 ) {
                     // stay on the same page and show a notice.
-                    $notice['warning'] = ( empty($apiResponse['wait_reason']) ? __( 'Please wait while we verify your A and CNAME record', 'ssl-zen' ) : $apiResponse['wait_reason'] );
+                    $notice['warning'] = ( empty($apiResponse['wait_reason']) ? __( 'Please wait while we verify your A record', 'ssl-zen' ) : $apiResponse['wait_reason'] );
                     $scanDnsButtonClass = 'd-none';
                     $timerButtonClass = '';
                     $image = 'warning-circle';
@@ -1265,7 +1282,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
             _e( 'Find DNS Settings or just Settings.', 'ssl-zen' );
             ?></li>
 							<li><?php 
-            _e( 'Look for A and CNAME records and update them with values displayed in the table on the left side.', 'ssl-zen' );
+            _e( 'Look for the A record and update it with the value displayed in the table on the left side.', 'ssl-zen' );
             ?> </li>
 							<li><?php 
             _e( 'If you cannot enter TTL as 300, try 600 or the lowest value allowed by your domain provider.', 'ssl-zen' );
@@ -2490,7 +2507,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
 									<td class="amount premium">
 										<div>
 											<h3>Premium</h3>
-											<span>$29</span>
+											<span>$36</span>
 											<span class="perioud">/ year</span>
 										</div>
 									</td>
@@ -2635,7 +2652,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
 									<td class="amount premium">
 										<div>
 											<h3>Premium</h3>
-											<span>$29</span>
+											<span>$36</span>
 											<span class="perioud">/ year</span>
 										</div>
 									</td>
@@ -3246,6 +3263,16 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
                 }
                 ?>
 							</div>
+
+							<a href="#"
+							   class="d-inline-block primary mb-2 stackpath-reset sslzen-form-button" data-hidden="#stackpath_reset_plugin" data-hidden-value="1"><?php 
+                _e( 'Reset Plugin', 'ssl-zen' );
+                ?></a>
+							<input type="hidden" name="stackpath_reset_plugin" id="stackpath_reset_plugin">
+							<span class="d-block mini-message"><?php 
+                _e( 'This will reset the plugin and allow you to start from the beginning.', 'ssl-zen' );
+                ?></span>
+
 						</div>
 					</div>
 			<?php 
@@ -3340,7 +3367,6 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
                     update_option( 'ssl_zen_ssl_activated', '1' );
                     update_option( 'ssl_zen_settings_stage', 'review' );
                     ssl_zen_helper::removeLogs();
-                    update_option( 'ssl_zen_stackpath_activated', '1' );
                     self::fix_wp_config();
                     wp_redirect( admin_url( 'admin.php?page=ssl_zen&tab=review' ) );
                     die;
@@ -4013,21 +4039,27 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
                 delete_option( 'ssl_zen_domain_verification_variant' );
                 delete_option( 'ssl_zen_dns_check_activation' );
                 delete_option( 'ssl_zen_enable_debug' );
+                delete_option( 'ssl_zen_activated' );
+                delete_option( 'ssl_zen_activated_date' );
+                // this will help in firing reactivation.
+                add_option( 'ssl_zen_deactivated', 1 );
                 self::remove_fix_wp_config();
             }
             
-            /* Remove rules from .htaccess file */
-            
-            if ( is_writable( ABSPATH . '.htaccess' ) ) {
-                $htaccess = file_get_contents( ABSPATH . '.htaccess' );
-                /* Remove rules from htaccess */
-                $pattern = "/#\\s?BEGIN\\s?SSL_ZEN.*?#\\s?END\\s?SSL_ZEN/s";
-                if ( preg_match( $pattern, $htaccess ) ) {
-                    $htaccess = preg_replace( $pattern, "", $htaccess );
+            if ( !sz_fs()->is_plan( 'cdn', true ) ) {
+                /* Remove rules from .htaccess file */
+                
+                if ( is_writable( ABSPATH . '.htaccess' ) ) {
+                    $htaccess = file_get_contents( ABSPATH . '.htaccess' );
+                    /* Remove rules from htaccess */
+                    $pattern = "/#\\s?BEGIN\\s?SSL_ZEN.*?#\\s?END\\s?SSL_ZEN/s";
+                    if ( preg_match( $pattern, $htaccess ) ) {
+                        $htaccess = preg_replace( $pattern, "", $htaccess );
+                    }
+                    insert_with_markers( ABSPATH . '.htaccess', '', $htaccess );
                 }
-                insert_with_markers( ABSPATH . '.htaccess', '', $htaccess );
-            }
             
+            }
             self::remove_plugin();
             // TODO check this
             // Added by Freemius to fix the 'Auto Install after payment' bug.

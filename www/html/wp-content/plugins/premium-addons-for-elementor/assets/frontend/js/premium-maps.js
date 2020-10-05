@@ -60,7 +60,7 @@ jQuery(window).on("elementor/frontend/init", function () {
                 ),
                     icon_img = pin.attr("data-icon"),
                     maxWidth = pin.attr("data-max-width"),
-                    iconSize = pin.attr("data-icon-size");
+                    iconSize = parseInt(pin.attr("data-icon-size"));
 
                 if (icon_img != "") {
                     var icon = {
@@ -72,7 +72,6 @@ jQuery(window).on("elementor/frontend/init", function () {
                         icon.scaledSize = new google.maps.Size(iconSize, iconSize);
                         icon.origin = new google.maps.Point(0, 0);
                         icon.anchor = new google.maps.Point(iconSize / 2, iconSize);
-
                     }
                 }
 

@@ -6,7 +6,7 @@ Requires at least: 4.2
 License: GPL3
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 3.0.3
+Stable tag: 3.0.7
 
 Helps install a free SSL certificate, fixes mixed content, insecure content by redirecting to https, and forces SSL on all pages.
 
@@ -51,7 +51,7 @@ For more information about our plugin, please visit [sslzen.com](https://sslzen.
 
 Legal:
 - By downloading our plugin, You agree to Let’s Encrypt® [Terms of Service](https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf)
-- By download our plugin, You agree to [LEClient license terms](https://github.com/yourivw/LEClient/blob/master/LICENSE), a PHP LetsEncrypt client library to verify domain ownership and generate SSL certificate for your website.
+- By downloading our plugin, You agree to [LEClient license terms](https://github.com/yourivw/LEClient/blob/master/LICENSE), a PHP LetsEncrypt client library to verify domain ownership and generate SSL certificate for your website.
 - We use [Let's Debug](https://letsdebug.net/) API, a diagnostic tool to help figure out why you might not be able to issue a certificate for Let's Encrypt®.
 - We use [Freemius](https://freemius.com) to collect non-sensitive diagnostic data about your website should you opt-in.
 
@@ -120,6 +120,22 @@ Free certificates are of Domain Validation type (DV) and do not hold that inform
 7. Settings to enable 301 redirection the settings page.
 
 == Changelog ==
+= 3.0.7 =
+* Improved Re-Activation process for StackPath
+* Improved error messaging
+
+= 3.0.6 =
+* Changed pricing of premium version to $36
+
+= 3.0.5 =
+* Updated Freemius SDK
+* Improved StackPath DNS verification
+* Added option to reset plugin for StackPath
+
+= 3.0.4 =
+* Pricing page has been hidden so users are redirected to buy the correct plan
+* Updated cPanel Availability script
+
 = 3.0.3 =
 * Added better error messages for StackPath DNS verification
 

@@ -7,7 +7,7 @@
  * Plugin Name:       SSL Zen - Free SSL Certificate & HTTPS Redirect for WordPress
  * Plugin URI:        https://sslzen.com
  * Description:       Helps install a free SSL certificate from LetsEncrypt, fixes mixed content, insecure content by redirecting to https, and forces SSL on all pages.
- * Version:           3.0.3
+ * Version:           3.0.7
  * Author:            SSL Zen
  * Author URI:        http://sslzen.com
  * License:           GNU General Public License v3.0
@@ -38,21 +38,21 @@ if ( !function_exists( 'sz_fs' ) ) {
             // Include Freemius SDK.
             require_once dirname( __FILE__ ) . '/freemius/start.php';
             $sz_fs = fs_dynamic_init( array(
-                'id'               => '4586',
-                'slug'             => 'ssl-zen',
-                'type'             => 'plugin',
-                'public_key'       => 'pk_89da8f4d86d21701663c6381a4ab4',
-                'is_premium'       => false,
-                'premium_suffix'   => 'Pro',
-                'has_addons'       => false,
-                'has_paid_plans'   => true,
-                'is_org_compliant' => false,
-                'has_affiliation'  => 'all',
-                'menu'             => array(
+                'id'              => '4586',
+                'slug'            => 'ssl-zen',
+                'type'            => 'plugin',
+                'public_key'      => 'pk_89da8f4d86d21701663c6381a4ab4',
+                'is_premium'      => false,
+                'premium_suffix'  => 'Pro',
+                'has_addons'      => false,
+                'has_paid_plans'  => true,
+                'has_affiliation' => 'all',
+                'menu'            => array(
+                'pricing'    => false,
                 'slug'       => 'ssl_zen',
                 'first-path' => 'admin.php?page=ssl_zen&tab=step1',
             ),
-                'is_live'          => true,
+                'is_live'         => true,
             ) );
         }
         
@@ -95,7 +95,7 @@ if ( !function_exists( 'sz_fs' ) ) {
  * Define constants used in the plugin
  */
 if ( !defined( 'SSL_ZEN_PLUGIN_VERSION' ) ) {
-    define( 'SSL_ZEN_PLUGIN_VERSION', '3.0.3' );
+    define( 'SSL_ZEN_PLUGIN_VERSION', '3.0.7' );
 }
 if ( !defined( 'SSL_ZEN_DIR' ) ) {
     define( 'SSL_ZEN_DIR', plugin_dir_path( __FILE__ ) . 'ssl_zen/' );

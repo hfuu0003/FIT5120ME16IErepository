@@ -131,10 +131,6 @@
          * @return bool
          */
         static function is_localhost_by_address( $url ) {
-			if ( SSL_ZEN_PLUGIN_ALLOW_DEV ) {
-				return false;
-			}
-
             if ( false !== strpos( $url, '127.0.0.1' ) ||
                  false !== strpos( $url, 'localhost' )
             ) {
@@ -175,6 +171,7 @@
                 // WPEngine staging.
                 fs_ends_with( $subdomain, '.staging.wpengine.com' ) ||
                 fs_ends_with( $subdomain, '.dev.wpengine.com' ) ||
+                fs_ends_with( $subdomain, '.wpengine.com' ) ||
                 // Pantheon
                 ( fs_ends_with( $subdomain, 'pantheonsite.io' ) &&
                   ( fs_starts_with( $subdomain, 'test-' ) || fs_starts_with( $subdomain, 'dev-' ) ) ) ||
@@ -183,15 +180,13 @@
                 // Kinsta
                 ( fs_starts_with( $subdomain, 'staging-' ) && ( fs_ends_with( $subdomain, '.kinsta.com' ) || fs_ends_with( $subdomain, '.kinsta.cloud' ) ) ) ||
                 // DesktopServer
-                fs_ends_with( $subdomain, '.dev.cc' )
+                fs_ends_with( $subdomain, '.dev.cc' ) ||
+                // Pressable
+                fs_ends_with( $subdomain, '.mystagingwebsite.com' )
             );
         }
 
         function is_localhost() {
-			if ( SSL_ZEN_PLUGIN_ALLOW_DEV ) {
-				return false;
-			}
-
             return ( WP_FS__IS_LOCALHOST_FOR_SERVER || self::is_localhost_by_address( $this->url ) );
         }
 
