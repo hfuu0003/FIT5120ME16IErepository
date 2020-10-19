@@ -316,6 +316,7 @@
 							y >= activationHeight ? wrappernav.classList.add('wrapfixed') : "";
 
 							y >= activationHeight ? wrappermysticky.style.height = mydivHeight + 'px' : "";
+							y >= activationHeight ? wrappernav.style.height = mydivHeight + 'px' : "";
 							y >= activationHeight ? mystickyClass.style.width = mydivWidth + "px" : "";
 
 

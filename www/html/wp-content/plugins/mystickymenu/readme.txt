@@ -3,7 +3,7 @@ Contributors: tomeraharon, galdub, premio
 Tags:menu, header, sticky menu, sticky header, floating menu, floating navigation menu, navigation menu, navigation, sticky navigation menu, welcome bar, hello bar, top bar, sticky bar, floating bar, notification bar
 Requires at least: 3.5.1
 Tested up to: 5.5
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv2 or later
 
 This sticky menu plugin will make your menu or header stick to the top of page, when scrolled down and up. Also create a beautiful welcome notification bar with it.
@@ -75,6 +75,7 @@ But wait, there's more 😉
 * Set an expiry date for your welcome bar, including settings a timezone
 * Display your floating notification bar on specific pages
 * New: You can set a thank you screen which appears after the button is clicked (can be used for coupons or any other message you want to show your visitors after they click on the button)
+* New: Add a rel Attribute to your notification bar button
 
 <a href="https://premio.io/downloads/mystickymenu/" target="_blank" title="mystickymenu pro plans"><strong>>>> See Pro plans here</strong></a> 
 
@@ -267,6 +268,8 @@ After installing the plugin, you’ll have the option to turn on the welcome bar
 
 
 == Changelog ==
+= 2.4.5 =
+Background color fix
 = 2.4.4 =
 New entrance effects and bug fixes
 = 2.4.3 =

@@ -6,7 +6,7 @@ Requires at least: 4.2
 License: GPL3
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 3.0.7
+Stable tag: 3.0.9
 
 Helps install a free SSL certificate, fixes mixed content, insecure content by redirecting to https, and forces SSL on all pages.
 
@@ -20,23 +20,42 @@ SSL Zen helps you to secure your website, protect your customer's data and show 
 
 
 = Features of Free Version: =
-* Secure padlock in the browser.
-* Displays 'connection is secure' message.
-* Increased SEO ranking.
-* Customers will trust you.
-* Accept safe payments online.
-* Compliance with regulation standards.
-* Strong bank-level security.
+* Secure padlock in the browser
+* Displays 'connection is secure' message
+* Increased SEO ranking
+* Customers will trust you
+* Accept safe payments online
+* Compliance with regulation standards
+* Strong bank-level security
 
 Note: The free version requires you to manually verify your domain name with Let's Encrypt by uploading a file on your server. You will also need to upload the SSL certificates on your server and configure them.
 SSL certificates from Let's Encrypt are only valid for 90 days and need to be manually renewed. If you fail to renew, your website will start showing a not secure warning to the visitors.
 If you want the plugin to automatically install the SSL certificate and auto-renew it, please check the premium version of the plugin.
 
 = Features of Premium Version: =
-* Free Private EdgeSSL™ Certificate by Sectigo. No activation or configuration required. Automatic Renewal.
-* Accelerate your website with StackPath's Global Content Delivery Network.
-* Enterprise-Grade Web Application Firewall protects your website from the vulnerabilities, threats, and attacks.
-* Premium one-on-one unlimited support.
+* Automatic Domain Verification
+* Automatic SSL Certificate Generation
+* Automatic SSL Certificate Renewal
+* Accelerate your website with StackPath's Global Content Delivery Network
+* Premium Support - Live Chat, Email Support
+* Spam Protection
+* Brute-Force Protection
+* Forces Browser Validation on traffic anomalies
+* Performs Real-time threat intelligence for IP addresses, source location, and information on malicious IPs.
+* Patches known vulnerabilities in the Apache Struts framework by blocking requests suspected of exploiting these vulnerabilities
+* Enables a set of rules designed to block common Wordpress exploits
+* Blocks clients performing multiple injection attacks.
+* Blocks Probing and Forced Browsing
+* Blocks SQL injection attack attempts
+* Blocks Cross-Site-Scripting (XSS) attack attempts
+* Blocks Shellshock attack attempts
+* Blocks requests suspected of being a Remote File Inclusion attempt
+* Blocks requests suspected of a Local File Inclusion attempt
+* Blocks attempts to access and potentially harm your servers through backdoors
+* Blocks requests suspected of web shell attempts
+* Blocks requests suspected of Response header injection attempts
+* Blocks Invalid User Agents
+* Blocks Unknown User Agents
 
 
 = Why get a SSL padlock? =
@@ -120,6 +139,12 @@ Free certificates are of Domain Validation type (DV) and do not hold that inform
 7. Settings to enable 301 redirection the settings page.
 
 == Changelog ==
+= 3.0.9 =
+* Bug fix for DNS verification page design layout
+
+= 3.0.8 =
+* Changed pricing structure for premium versions
+
 = 3.0.7 =
 * Improved Re-Activation process for StackPath
 * Improved error messaging

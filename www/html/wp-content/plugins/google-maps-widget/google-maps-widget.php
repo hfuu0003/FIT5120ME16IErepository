@@ -4,10 +4,12 @@ Plugin Name: Maps Widget for Google Maps
 Plugin URI: https://www.gmapswidget.com/
 Description: Display a single image super-fast loading Google Map in a widget. A larger, full featured map is available in a lightbox. Includes a user-friendly interface and numerous appearance options.
 Author: WebFactory Ltd
-Version: 4.18
+Version: 4.19
 Author URI: https://www.gmapswidget.com/
 Text Domain: google-maps-widget
 Domain Path: lang
+Requires at least: 4.0
+Requires PHP: 5.2
 
   Copyright 2012 - 2020  Web factory Ltd  (email : gmw@webfactoryltd.com)
 
@@ -40,6 +42,9 @@ define('GMW_BASE_FILE', basename(__FILE__));
 
 require_once GMW_PLUGIN_DIR . 'gmw-widget.php';
 
+require_once GMW_PLUGIN_DIR . 'wp301/wp301.php';
+new wf_wp301(__FILE__, 'settings_page_gmw_options');
+
 class GMW {
   static $version;
   static $options = 'gmw_options';
@@ -65,8 +70,6 @@ class GMW {
 
       // check a few variables
       GMW::maybe_upgrade();
-      add_filter('pre_set_site_transient_update_plugins', array('GMW', 'update_filter'));
-      add_filter('plugins_api', array('GMW', 'update_details'), 100, 3);
 
       // aditional links in plugin description
       add_filter('plugin_action_links_' . basename(dirname(__FILE__)) . '/' . basename(__FILE__),
@@ -880,11 +883,15 @@ class GMW {
       } else {
         $visible = '';
       }
-      $plugin = plugin_basename(__FILE__);
-      $update_url = wp_nonce_url(admin_url('update.php?action=upgrade-plugin&amp;plugin=' . urlencode($plugin)), 'upgrade-plugin_' . $plugin );
+
       $out .= '<div class="after_activate" ' . $visible . '>';
-      $out .= '<p class="center">Thank you for purchasing Maps Widget for Google Maps <b class="gmw-pro-red">PRO</b>! Your license has been verified and activated.</p><p class="center">Please <b>click the button below</b> to update plugin files to PRO version.</p>';
-      $out .= '<p class="center"><a href="' . esc_url($update_url) . '" class="button button-primary">Update Maps Widget for Google Maps</a></p>';
+      $out .= '<p class="center">Thank you for purchasing Maps Widget for Google Maps <b class="gmw-pro-red">PRO</b>! Your license has been verified.</p>';
+      $out .= '<ol class="gmw-faq-ul">
+      <li><a href="https://gmapswidget.com/pro-download/" target="_blank">Download</a> the PRO version ZIP file</li>
+      <li>Go to <a href="' . admin_url('plugin-install.php') . '">Plugins - Add New</a> and install the PRO version</li>
+      <li>When prompted, overwrite the free version with the PRO one</li>
+      <li>Create some maps ;)</li>
+    </ol>';
       $out .= '</div>';
 
       $out .= '</div>'; // content
@@ -1091,11 +1098,13 @@ class GMW {
 
     echo '<div id="gmw-license" style="display: none;">';
     if (GMW::is_activated()) {
-      $plugin = plugin_basename(__FILE__);
-      $update_url = wp_nonce_url(admin_url('update.php?action=upgrade-plugin&amp;plugin=' . urlencode($plugin)), 'upgrade-plugin_' . $plugin );
-
-      echo '<p>Your <b class="gmw-pro-red">PRO</b> license is validated &amp; active. Please update the plugin to activate PRO features. In case of any problems, contact <a href="mailto:gmw@webfactoryltd.com?subject=Update%20problem" title="Contact Maps Widget for Google Maps PRO support">support</a>.</p>';
-      echo '<p><a href="' . esc_url($update_url) . '" class="button button-primary">Update Maps Widget for Google Maps</a></p>';
+      echo '<p>Your <b class="gmw-pro-red">PRO</b> license is validated.';
+      echo '<ol class="normal">
+      <li><a href="https://gmapswidget.com/pro-download/" target="_blank">Download</a> the PRO version ZIP file</li>
+      <li>Go to <a href="' . admin_url('plugin-install.php') . '">Plugins - Add New</a> and install the PRO version</li>
+      <li>When prompted, overwrite the free version with the PRO one</li>
+      <li>Create some maps ;)</li>
+    </ol>';
     } else {
       echo '<p>If you already bought the <b class="gmw-pro-red">PRO</b> license please <a href="#" data-target-screen="gmw_dialog_activate" class="open_promo_dialog">enter your license key</a> to activate it.</p>';
       echo '<p>Interested in a lifetime <b class="gmw-pro-red">PRO</b> license that offers more than 50 extra fetures?&nbsp;&nbsp; <a href="#" class="open_promo_dialog button button-primary">Upgrade now!</a></p>';
@@ -1124,109 +1133,11 @@ class GMW {
       GMW::set_options(array('activation_code' => $code, 'license_active' => $tmp['license_active'], 'license_type' => $tmp['license_type'], 'license_expires' => $tmp['license_expires']));
     }
     if ($tmp['license_active'] && $tmp['success']) {
-      set_site_transient('update_plugins', null);
       wp_send_json_success();
     } else {
       wp_send_json_error($tmp['error']);
     }
   } // activate_license_key_ajax
-
-
-  // get info on new plugin version if one exists
-  static function update_filter($current) {
-    if (!GMW::is_activated()) {
-      return $current;
-    }
-
-    static $response = false;
-    $options = GMW::get_options();
-    $plugin = plugin_basename(__FILE__);
-
-    if(empty($response) || is_wp_error($response)) {
-      $request_params = array('sslverify' => false, 'timeout' => 15, 'redirection' => 2);
-      $request_args = array('action' => 'update_info',
-                            'timestamp' => time(),
-                            'codebase' => 'free',
-                            'version' => GMW::$version,
-                            'code' => $options['activation_code'],
-                            'site' => get_home_url());
-
-      $url = add_query_arg($request_args, GMW::$licensing_servers[0]);
-      $response = wp_remote_get(esc_url_raw($url), $request_params);
-
-      if (is_wp_error($response)) {
-        $url = add_query_arg($request_args, GMW::$licensing_servers[1]);
-        $response = wp_remote_get(esc_url_raw($url), $request_params);
-      }
-    } // if !$response
-
-    if (!is_wp_error($response) && wp_remote_retrieve_body($response)) {
-      $data = json_decode(wp_remote_retrieve_body($response), false);
-      if (empty($current)) {
-        $current = new stdClass();
-      }
-      if (empty($current->response)) {
-        $current->response = array();
-      }
-      if (!empty($data) && is_object($data)) {
-        $data->icons = (array) $data->icons;
-        $data->banners = (array) $data->banners;
-        $current->response[$plugin] = $data;
-      }
-    }
-
-    return $current;
-  } // update_filter
-
-
-  // get plugin info for lightbox
-  static function update_details($false, $action, $args) {
-    if (!GMW::is_activated()) {
-      return false;
-    }
-
-    static $response = false;
-    $options = self::get_options();
-    $plugin = basename(GMW_PLUGIN_DIR);
-
-    if ($action != 'plugin_information' || empty($args->slug) || ($args->slug != $plugin)) {
-      return false;
-    }
-
-    if(empty($response) || is_wp_error($response)) {
-      $request_params = array('sslverify' => false, 'timeout' => 15, 'redirection' => 2);
-      $request_args = array('action' => 'update_info',
-                            'request_details' => serialize($args),
-                            'codebase' => 'free',
-                            'timestamp' => time(),
-                            'version' => GMW::$version,
-                            'code' => $options['activation_code'],
-                            'site' => get_home_url());
-
-      $url = add_query_arg($request_args, GMW::$licensing_servers[0]);
-      $response = wp_remote_get(esc_url_raw($url), $request_params);
-
-      if (is_wp_error($response) || !wp_remote_retrieve_body($response)) {
-        $url = add_query_arg($request_args, GMW::$licensing_servers[1]);
-        $response = wp_remote_get(esc_url_raw($url), $request_params);
-      }
-    } // if !$response
-
-    if (is_wp_error($response) || !wp_remote_retrieve_body($response)) {
-      $res = new WP_Error('plugins_api_failed', __('An unexpected HTTP error occurred during the API request.', 'google-maps-widget'), $response->get_error_message());
-    } else {
-      $res = json_decode(wp_remote_retrieve_body($response));
-
-      if (!is_object($res)) {
-        $res = new WP_Error('plugins_api_failed', __('Invalid API respone.', 'google-maps-widget'), wp_remote_retrieve_body($response));
-      } else {
-        $res->sections = (array) $res->sections;
-        $res->banners = (array) $res->banners;
-      }
-    }
-
-    return $res;
-  } // update_details
 
 
   // helper function for creating dropdowns
@@ -1312,12 +1223,6 @@ class GMW {
       $options['first_install_gmt'] = time();
       $options['first_install'] = current_time('timestamp');
       GMW::set_options($options);
-    }
-
-    // force plugin update for PRO users
-    if (!get_site_transient('gmw_update_plugins') && $options['first_version'] != GMW::$version && GMW::is_activated()) {
-      set_site_transient('update_plugins', null);
-      set_site_transient('gmw_update_plugins', true, WEEK_IN_SECONDS);
     }
   } // maybe_upgrade
 
@@ -1432,7 +1337,7 @@ class GMW {
   static function uninstall() {
     // at the moment, due to lite/pro upgrade we never delete options
     $options = GMW::get_options();
-    
+
     if (isset($options['allow_tracking']) && $options['allow_tracking'] === true) {
       wp_clear_scheduled_hook('gmw_biweekly_cron');
     }

@@ -203,10 +203,13 @@ class GoogleMapsWidget extends WP_Widget {
 
     // force update if activated
     if (GMW::is_activated()) {
-      $plugin = plugin_basename(GMW_PLUGIN_DIR . GMW_BASE_FILE);
-      $update_url = wp_nonce_url(admin_url('update.php?action=upgrade-plugin&amp;plugin=' . urlencode($plugin)), 'upgrade-plugin_' . $plugin );
-      echo '<p>Maps Widget for Google Maps <b class="gmw-pro-red">PRO</b> has been activated! Please <b>click the button below</b> to update plugin files to PRO version. Widget data is not lost and it will not get lost by updating.</p>';
-      echo '<p><a href="' . esc_url($update_url) . '" class="button button-primary">Update Maps Widget for Google Maps</a></p>';
+      echo '<p>Maps Widget for Google Maps <b class="gmw-pro-red">PRO</b> has been activated!';
+      echo '<ol class="normal">
+      <li><a href="https://gmapswidget.com/pro-download/" target="_blank">Download</a> the PRO version ZIP file</li>
+      <li>Go to <a href="' . admin_url('plugin-install.php') . '">Plugins - Add New</a> and install the PRO version</li>
+      <li>When prompted, overwrite the free version with the PRO one</li>
+      <li>Create some maps ;)</li>
+    </ol>';
       echo '<style type="text/css"> #widget-' . $this->id . '-savewidget { display: none; } </style>';
       echo '<input id="' . $this->get_field_id('title') . '" name="' . $this->get_field_name('title') . '" type="hidden" value="' . esc_attr($title) . '">';
 

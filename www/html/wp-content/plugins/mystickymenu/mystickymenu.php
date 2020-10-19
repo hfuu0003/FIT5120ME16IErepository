@@ -3,7 +3,7 @@
 Plugin Name: myStickymenu
 Plugin URI: https://premio.io/
 Description: Simple sticky (fixed on top) menu implementation for navigation menu and Welcome bar for announcements and promotion. After install go to Settings / myStickymenu and change Sticky Class to .your_navbar_class or #your_navbar_id.
-Version: 2.4.4
+Version: 2.4.5
 Author: Premio
 Author URI: https://premio.io/downloads/mystickymenu/
 Text Domain: mystickymenu
@@ -12,7 +12,7 @@ License: GPLv2 or later
 */
 
 defined('ABSPATH') or die("Cannot access pages directly.");
-define( 'MYSTICKY_VERSION', '2.4.4' );
+define( 'MYSTICKY_VERSION', '2.4.5' );
 define('MYSTICKYMENU_URL', plugins_url('/', __FILE__));  // Define Plugin URL
 define('MYSTICKYMENU_PATH', plugin_dir_path(__FILE__));  // Define Plugin Directory Path
 
@@ -97,7 +97,7 @@ class MyStickyMenuBackend
 
     public function mysticky_admin_script($hook) {
 		
-		if ( !isset($_GET['page']) || ( isset($_GET['page']) && $_GET['page'] != 'my-stickymenu-settings' && $_GET['page'] != 'my-stickymenu-welcomebar' && $_GET['page'] != 'my-stickymenu-new-welcomebar' && $_GET['page'] != 'my-stickymenu-upgrade' )) {
+		if ( !isset($_GET['page']) || ( isset($_GET['page']) && $_GET['page'] != 'my-stickymenu-settings' && $_GET['page'] != 'my-stickymenu-welcomebar' && $_GET['page'] != 'my-stickymenu-new-welcomebar' && $_GET['page'] != 'my-stickymenu-upgrade' && $_GET['page'] != 'msm-recommended-plugins' )) {
 			return;
 		}
 
@@ -133,6 +133,10 @@ class MyStickyMenuBackend
 	}
 
 	public function add_plugin_page(){
+		if ( isset($_GET['hide_msmrecommended_plugin']) && $_GET['hide_msmrecommended_plugin'] == 1) {
+			update_option('hide_msmrecommended_plugin',true);				
+		}
+		$hide_msmrecommended_plugin = get_option('hide_msmrecommended_plugin');
 		// This page will be under "Settings"
 		add_menu_page(
 			'Settings Admin',
@@ -165,7 +169,16 @@ class MyStickyMenuBackend
 			'my-stickymenu-new-welcomebar',				
 			array( $this, 'mystickystickymenu_admin_new_welcomebar_page' )
 		);
-		
+		if ( !$hide_msmrecommended_plugin){
+			add_submenu_page(
+				'my-stickymenu-settings',
+				'msm-recommended-plugins',
+				'Recommended Plugins',
+				'manage_options',
+				'msm-recommended-plugins',
+				array( $this, 'mystickymenu_recommended_plugins' )
+			);
+		}
 		add_submenu_page(
 			'my-stickymenu-settings',
 			'Upgrade to Pro',
@@ -743,6 +756,9 @@ class MyStickyMenuBackend
 			</div>
 		</div>
 		<?php
+	}
+	public function mystickymenu_recommended_plugins() {
+		include_once 'recommended-plugins.php';
 	}
 	public function mystickymenu_admin_upgrade_to_pro() {
         $pro_url = "https://go.premio.io/checkount/?edd_action=add_to_cart&download_id=2199&edd_options[price_id]=";

@@ -107,8 +107,10 @@
 			var mysticky_welcomebar_action = $( this ).val();
 			if ( mysticky_welcomebar_action == 'redirect_to_url' ) {
 				$( '.mysticky-welcomebar-redirect' ).show();
+				$( '.mysticky-welcomebar-redirect-container' ).show();
 			} else {
 				$( '.mysticky-welcomebar-redirect' ).hide();
+				$( '.mysticky-welcomebar-redirect-container' ).hide();
 			}
 			if ( $('.mysticky-welcomebar-action option:selected').attr('data-href') !== '' && mysticky_welcomebar_action == 'thankyou_screen' ) {
 				window.open( $( '.mysticky-welcomebar-action option:selected' ).attr('data-href') , '_blank');

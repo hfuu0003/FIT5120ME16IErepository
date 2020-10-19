@@ -1,11 +1,11 @@
 === Maps Widget for Google Maps - Google Maps Builder ===
-Contributors: WebFactory, GoogleMapsWidget, WPReset, underconstructionpage
+Contributors: WebFactory
 Tags: google maps, maps, map, google map, google maps widget, map markers, wp google maps, wp google map, map plugin, directions, google map plugin, map widget
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.0
 Tested up to: 5.5
-Stable tag: 4.18
+Stable tag: 4.19
 Requires PHP: 5.2
 
 Are your Google Maps slow? Try Map Widget for Google Maps. You'll have a fast Google Maps widget with a thumbnail & lightbox map in minutes!
@@ -180,6 +180,11 @@ Try <a href="http://www.niftymaps.co">Nifty Maps</a> - a comprehensive Map Build
 7. Thumbnail map - light color scheme
 
 == Changelog ==
+
+= 4.19 =
+* 2020/10/09
+* minor fixes
+* added promo for WP 301 Redirects
 
 = 4.18 =
 * 2020/09/16

@@ -1489,7 +1489,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
 									</div>
 									<div>
 										<h5><?php 
-                _e( 'Step2 ', 'ssl-zen' );
+                _e( 'Step 2 ', 'ssl-zen' );
                 ?></h5>
 										<p><?php 
                 _e( 'Upload verification file(s) ', 'ssl-zen' );
@@ -1692,7 +1692,7 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
                 ?>">
 								<div class="row">
 									<div class="col-md-8">
-										<div>
+										<div class="ssl-zen-domain-verification-variant-tab-container-left">
 											<h4 class="mb-4">
 												<?php 
                 _e( 'DNS Verification', 'ssl-zen' );
@@ -2507,8 +2507,8 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
 									<td class="amount premium">
 										<div>
 											<h3>Premium</h3>
-											<span>$36</span>
-											<span class="perioud">/ year</span>
+											<span>$4</span>
+											<span class="perioud">/ month</span>
 										</div>
 									</td>
 									<td class="amount free">
@@ -2652,8 +2652,8 @@ if ( !class_exists( 'ssl_zen_admin' ) ) {
 									<td class="amount premium">
 										<div>
 											<h3>Premium</h3>
-											<span>$36</span>
-											<span class="perioud">/ year</span>
+											<span>$2.4</span>
+											<span class="perioud">/ month</span>
 										</div>
 									</td>
 									<td class="amount free">

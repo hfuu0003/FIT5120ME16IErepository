@@ -474,6 +474,9 @@ footer a:focus {
     background-image: url("../img/dns-variant-selected.svg");
     color: #1890FF;
 }
+.ssl-zen-domain-verification-variant-tab-container-left{
+    padding: 32px 0 0 32px
+}
 
 .ssl-zen-domain-verification-variant-tab-container h5 {
     font-size: 18px;

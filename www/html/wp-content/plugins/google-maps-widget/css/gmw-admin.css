@@ -16,6 +16,18 @@ ul.normal {
   margin: 0 0 0 15px;
 }
 
+ol.normal {
+  padding: 5px 0;
+  margin: 0 0 0 15px;
+  display: inline-block;
+}
+ol.normal li {
+  background-color: transparent !important;
+}
+ol.normal li a {
+  padding: 0 !important;
+}
+
 .wrap.gmw-options .ui-tabs {
   margin-top: 30px;
 }

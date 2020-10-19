@@ -2219,3 +2219,60 @@ div#wp-mysticky_bar_text-wrap {
     }
 }
 
+
+
+.mysticky-custom-fields-tooltip{
+	position: relative;
+	margin-left: 20px;
+}
+.mysticky-custom-fields-tooltip:hover p {
+    bottom: 100%;
+    opacity: 1;
+    visibility: visible;
+}
+
+.mysticky-custom-fields-tooltip a.mysticky-tooltip {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 35px;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;    
+    color: #ffffff;
+	text-decoration: none;
+}
+.mysticky-custom-fields-tooltip a.mysticky-tooltip .dashicons{
+	text-transform: uppercase;
+	color: #1E1E1E;
+}
+.mysticky-custom-fields-tooltip p {
+    margin: 0;
+    margin-bottom: 0px;
+    background-color: #000;
+    width: 380px;
+    padding: 10px 10px;
+    border-radius: 8px;
+    color: #fff;
+    position: absolute;
+    bottom: 200%;
+    left: -20px;
+    margin-bottom: 10px;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+    opacity: 0;
+    visibility: hidden;
+}
+.mysticky-custom-fields-tooltip p::before {
+    content: "";
+    border-top: 10px solid #000;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -8px;
+    left: 25px;
+}
