@@ -1,4 +1,12 @@
 <?php
+/**
+ * Test the wpdb class can working or not
+ *
+ * The script use WordPress global class wpdb to connect to the database which is used by WordPress
+ * and use SQL to do the query operation in the database
+ *
+ * @package WordPress
+ */
 if (isset($_POST['submit'])) {
 
     $code_qr = $_POST["codename"];

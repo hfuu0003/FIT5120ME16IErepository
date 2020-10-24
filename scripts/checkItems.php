@@ -1,12 +1,23 @@
+<!-- Http post method -->
 <form method="post">
+    <!-- One input box with datalist  -->
     <label><?php _e('Check the item here: '); ?></label>
     <input type="text" name="codename" list="items"/>
     <datalist id="items" style="display: none; table-layout: fixed; word-break: break-all;">
         <?php
+        /**
+         * Options in datalist
+         *
+         * The post method use this script during creating of datalist.
+         * The script use WordPress global class wpdb to connect to the database which is used by WordPress
+         * and use SQL to do the query operation in the database
+         *
+         * @package WordPress
+         */
         global $wpdb;
         $query = "SELECT * FROM wp_item_information";  //table name here
         $results = $wpdb->get_results($query);
-        foreach ($results as $row) {
+        foreach ($results as $row) { //use a loop to display all results get from the query.
             echo '<option value="'.$row->name.'">' .$row->name. '</option>'; //replace name with colunmn name
         }
         ?>
@@ -16,13 +27,25 @@
 
 
 <?php
+/**
+ * Check weather the input in post method match the records in wp_item_information table
+ * and display the information according to the result
+ *
+ * Get one variable from post method which is codename used in the query
+ *
+ * The script use WordPress global class wpdb to connect to the database which is used by WordPress
+ * and use SQL to do the query operation in the database
+ *
+ * @trigger Http post method
+ * @package WordPress
+ */
 if (isset($_POST['submit'])) {
 
     $code_qr = $_POST["codename"];
     global $wpdb;
     $query = "SELECT * FROM wp_item_information WHERE name  ='".$code_qr."'";
     $results = $wpdb->get_results($query);
-    foreach ($results as $row) {
+    foreach ($results as $row) { //use a loop to display all results get from the query.
         $exist = $row-> name ;
     }
     if ($exist ) {
