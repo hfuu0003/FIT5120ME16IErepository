@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class FoodQuePanel : MonoBehaviour
 {
-    public List<SelectItem> selectOneQueItems;
-    public List<SelectItem> selectTwoQueItems;
+    public List<SelectItem> selectOneQueItems;//Object selected in the first question
+    public List<SelectItem> selectTwoQueItems;//Objects selected in the second question
     public GameObject errorOneObj;
     public GameObject errorTwoObj;
     public GameObject rightOneObj;
@@ -46,7 +46,7 @@ public class FoodQuePanel : MonoBehaviour
 
         currSelectCoun = 0;
     }
-
+    //Initialize two question status
     public void InitOneTwo()
     {
         for (int i = 0; i < selectTwoQueItems.Count; i++)
@@ -60,6 +60,7 @@ public class FoodQuePanel : MonoBehaviour
 
         currSelectCoun = 0;
     }
+    //Select the first question and click
     private void OnClickSelectBtns(SelectItem item)
     {
         if (item.isRightSelect)
@@ -84,14 +85,14 @@ public class FoodQuePanel : MonoBehaviour
             errorOneObj.SetActive(true);
         }
     }
-    
+    //Click on the second question
     private void OnClickSelectTwoBtns(SelectItem item)
     {
         if (item.isRightSelect)
         {
             if (!item.isSelect )
             {
-                item.SetSelect();right
+                item.SetSelect();
                 rightTwoImages[currSelectCoun].overrideSprite = item.GetSp();
                 rightTwoImages[currSelectCoun].color = Color.white;
                 currSelectCoun++;
@@ -110,6 +111,7 @@ public class FoodQuePanel : MonoBehaviour
         }
     }
 
+    //Initialize the first question state
     public void SetNextFoodQue()
     {
         InitOneQue();

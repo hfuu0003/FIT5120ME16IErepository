@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SelectMenuPanel : MonoBehaviour
 {
-    public List<Button> MenuButtons;
+    public List<Button> MenuButtons;//Menu button
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class SelectMenuPanel : MonoBehaviour
         switch (id)
         {
             case 0:
-                UIManager.Instance.OpenFoodPanel();
+                UIManager.Instance.OpenFoodPanel();//Open the food interface
                 break;
             case 1:
                 break;

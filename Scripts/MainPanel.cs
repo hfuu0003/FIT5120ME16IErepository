@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class MainPanel : MonoBehaviour
 {
-    public Button startBtn;
+    public Button startBtn;//Start button
 
-    public Button muteBtn;
+    public Button muteBtn;//Mute button
 
-    public Button unmuteBtn;
+    public Button unmuteBtn;//Turn on sound button
 
     // Start is called before the first frame update
     void Start()
     {
         startBtn.onClick.AddListener(() =>
         {
-            UIManager.Instance.OpenSelectMenuPanel();
+            UIManager.Instance.OpenSelectMenuPanel();//Open the menu selection panel
         });
 
-        muteBtn.onClick.AddListener(() => { AudioManager.Instance.AudioSourceBg.mute = true; });
+        muteBtn.onClick.AddListener(() => { AudioManager.Instance.AudioSourceBg.mute = true; });//Open music
 
-        unmuteBtn.onClick.AddListener(() => { AudioManager.Instance.AudioSourceBg.mute = false; });
+        unmuteBtn.onClick.AddListener(() => { AudioManager.Instance.AudioSourceBg.mute = false; });//Music off
     }
 
     // Update is called once per frame

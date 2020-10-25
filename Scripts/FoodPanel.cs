@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class FoodPanel : MonoBehaviour
 {
+    ///Menu button
     public List<Button> MenuButtons;
     // Start is called before the first frame update
     void Start()
@@ -16,19 +17,20 @@ public class FoodPanel : MonoBehaviour
         }
     }
 
+    //Click the menu button
     private void OnClickMenuBtns(int id)
     {
         switch (id)
         {
             case 0:
-                UIManager.Instance.CloseFoodPanel();
+                UIManager.Instance.CloseFoodPanel();//Close FOODPanel
                 break;
             case 1:
-                UIManager.Instance.OpenFoodQuePanel();
+                UIManager.Instance.OpenFoodQuePanel();//Open the FoodQuePanel panel
                 break;
             case 2:
-                UIManager.Instance.CloseFoodPanel();
-                UIManager.Instance.CloseSelectMenuPanel();
+                UIManager.Instance.CloseFoodPanel();//Close FOODPanel
+                UIManager.Instance.CloseSelectMenuPanel();//Close selection menu panel
                 break;
         }
     }

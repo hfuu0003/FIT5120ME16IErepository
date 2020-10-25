@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class GameCtrl : MonoBehaviour
 {
-    public static GameCtrl Instance;
+    public static GameCtrl Instance;//single instance
 
-    public int currFoodQueIndex = 1;
+    public int currFoodQueIndex = 1;//Which question is currently selected
     private void Awake()
     {
         Instance = this;
