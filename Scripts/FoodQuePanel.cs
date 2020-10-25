@@ -70,17 +70,17 @@ public class FoodQuePanel : MonoBehaviour
                 rightOneImages[currSelectCoun].overrideSprite = item.GetSp();
                 rightOneImages[currSelectCoun].color = Color.white;
                 currSelectCoun++;
-                Debug.Log("正确");
+                Debug.Log("right");
                 if (currSelectCoun >= 4)
                 {
-                    Debug.Log("通关");
+                    Debug.Log("pass");
                     rightOneObj.SetActive(true);
                 }
             }
         }
         else
         {
-            Debug.Log("错误");
+            Debug.Log("error");
             errorOneObj.SetActive(true);
         }
     }
@@ -91,21 +91,21 @@ public class FoodQuePanel : MonoBehaviour
         {
             if (!item.isSelect )
             {
-                item.SetSelect();
+                item.SetSelect();right
                 rightTwoImages[currSelectCoun].overrideSprite = item.GetSp();
                 rightTwoImages[currSelectCoun].color = Color.white;
                 currSelectCoun++;
-                Debug.Log("正确");
+                Debug.Log("right");
                 if (currSelectCoun >= 4)
                 {
-                    Debug.Log("通关");
+                    Debug.Log("pass");
                     rightTwoObj.SetActive(true);
                 }
             }
         }
         else
         {
-            Debug.Log("错误");
+            Debug.Log("error");
             errorTwoObj.SetActive(true);
         }
     }
