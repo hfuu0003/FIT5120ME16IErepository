@@ -1070,6 +1070,11 @@ class WPForms_Lite {
 				'icon' => 'addon-icon-post-submissions.png',
 			),
 			array(
+				'name' => 'Salesforce',
+				'desc' => 'WPForms Salesforce addon lets you add contacts to your Salesforce CRM account, so you can easily manage leads and relationships.',
+				'icon' => 'addon-icon-salesforce.png',
+			),
+			array(
 				'name' => 'Signatures',
 				'desc' => 'WPForms Signatures addon makes it easy for users to sign your forms. This WordPress signatures plugin will allow your users to sign contracts and other agreements with their mouse or touch screen.',
 				'icon' => 'addon-icon-signatures.png',
@@ -1117,7 +1122,7 @@ class WPForms_Lite {
 				</p>
 			</div>
 			<div class="wpforms-admin-content">
-				<div class="addons-container" id="wpforms-admin-addons-list">
+				<div id="wpforms-admin-addons-list">
 					<div class="list">
 						<?php foreach ( $addons as $addon ) : ?>
 						<div class="addon-container">

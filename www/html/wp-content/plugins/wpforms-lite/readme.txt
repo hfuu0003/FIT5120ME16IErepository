@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 4.9
 Tested up to: 5.5
-Stable tag: 1.6.2.3
+Stable tag: 1.6.3.1
 Requires PHP: 5.5
 License: GNU General Public License v2.0 or later
 
@@ -404,6 +404,26 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.6.3.1 =
+- Added: Native integration with Divi.
+- Added: Email field Allowlist/Denylist restrictions, see Email field Advanced Options.
+- Added: Form builder Help - contextual help, search docs, and more.
+- Added: Logging, which can be enabled for troubleshooting from WPForms > Tools > Logs.
+- Changed: Nicely notify users in the Form Builder when their WordPress session has expired, and they can't save the form anymore without a page reload.
+- Changed: Better AJAX form submit field error messages handling.
+- Fixed: Custom metabox heading styling due to WordPress core changes.
+- Fixed: Page title smart tag not working in some use cases when using AJAX form submissions.
+- Fixed: Various admin area display issues when the field label is empty.
+- Fixed: Logo Translate plugin integration issues.
+- Fixed: Elementor widget edge case issues.
+- Fixed: Form settings could be visible before the form was created.
+- Fixed: Form builder styling inconsistencies with Dropdown field styles.
+- Fixed: Input mask issues with some mobile browsers, notably Chrome.
+- Fixed: Always display the WPForms admin area in the user's language regardless of the site language.
+- Fixed: Do not load certain JS variables twice on the front end.
+- Fixed: Form title display issue inside the form builder with smaller view ports.
+- Fixed: Elementor widget display issue on frontend when no form has been created.
 
 = 1.6.2.3 =
 - Changed: Added shortcode access to a form embed modal and enhanced modal navigation.

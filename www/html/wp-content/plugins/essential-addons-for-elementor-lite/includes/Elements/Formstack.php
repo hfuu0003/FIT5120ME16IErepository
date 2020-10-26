@@ -60,7 +60,7 @@ class Formstack extends Widget_Base {
         return get_option('formstack_oauth2_code', '');
     }
 
-    private function formstackAuth (string $key) {
+    private function formstackAuth ($key) {
         return get_option('formstack_settings')[$key];
     }
 
@@ -148,7 +148,7 @@ class Formstack extends Widget_Base {
 
     protected function _register_controls () {
 
-        if (!apply_filters('eael/active_plugins', 'formstack/plugin.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'formstack/plugin.php')) {
             $this->formstack_not_activated();
             return;
         }
@@ -2039,7 +2039,7 @@ class Formstack extends Widget_Base {
 
     protected function render () {
 
-        if (!apply_filters('eael/active_plugins', 'formstack/plugin.php') || empty($this->get_forms())) {
+        if (!apply_filters('eael/is_plugin_active', 'formstack/plugin.php') || empty($this->get_forms())) {
             return;
         }
 

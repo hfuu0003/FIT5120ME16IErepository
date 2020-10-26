@@ -7,7 +7,7 @@ Author: Etoile Web Design
 Author URI: https://www.etoilewebdesign.com/
 Terms and Conditions: https://www.etoilewebdesign.com/plugin-terms-and-conditions/
 Text Domain: ultimate-faqs
-Version: 1.9.9
+Version: 1.9.10
 */
 
 global $ewd_ufaq_message;

@@ -11,7 +11,7 @@ trait Generator
 {
     public function init_request_data()
     {
-        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
             return;
         }
 
@@ -173,7 +173,7 @@ trait Generator
 
     public function update_request_data()
     {
-        if (!apply_filters('eael/active_plugins', 'elementor/elementor.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'elementor/elementor.php')) {
             return;
         }
 
@@ -190,6 +190,11 @@ trait Generator
         }
 
         if (!$this->request_requires_update) {
+            return;
+        }
+
+        // check if already updated
+        if (get_transient('eael_editor_updated_at') == get_transient($this->uid . '_updated_at')) {
             return;
         }
 

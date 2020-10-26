@@ -1,10 +1,10 @@
 jQuery(document).ready(function($) {
 	jQuery('.ewd-ufaq-main-dashboard-review-ask').css('display', 'block');
 
-	jQuery('.ewd-ufaq-main-dashboard-review-ask .notice-dismiss').on('click', function(event) {
-		var data = 'Ask_Review_Date=7&action=ewd_ufaq_hide_review_ask';
-		jQuery.post(ajaxurl, data, function() {});
-	});
+  jQuery(document).on('click', '.ewd-ufaq-main-dashboard-review-ask .notice-dismiss', function(event) {
+    var data = 'Ask_Review_Date=7&action=ewd_ufaq_hide_review_ask';
+    jQuery.post(ajaxurl, data, function() {});
+  });
 
 	jQuery('.ewd-ufaq-review-ask-yes').on('click', function() {
 		jQuery('.ewd-ufaq-review-ask-feedback-text').removeClass('ufaq-hidden');

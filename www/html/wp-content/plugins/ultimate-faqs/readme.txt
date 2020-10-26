@@ -266,6 +266,9 @@ Video 3 - FAQs Ordering
 
 == Changelog ==
 
+= 1.9.10 =
+- Further update for the feedback notice due to user who seems to still not be able to dismiss it.
+
 = 1.9.9 =
 - Corrects recent issue causing the feedback notice to not dismiss correctly
 
